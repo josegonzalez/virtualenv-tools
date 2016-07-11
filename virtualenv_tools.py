@@ -149,7 +149,7 @@ def update_local(base, new_path):
     if not os.path.isdir(local_dir):
         return
 
-    for folder in 'bin', 'lib', 'include':
+    for folder in 'bin', 'sbin', 'lib', 'include':
         filename = os.path.join(local_dir, folder)
         target = '../%s' % folder
         if os.path.islink(filename) and os.readlink(filename) != target:
@@ -167,6 +167,7 @@ def update_paths(base, new_path):
         return False
 
     bin_dir = os.path.join(base, 'bin')
+    sbin_dir = os.path.join(base, 'sbin')
     base_lib_dir = os.path.join(base, 'lib')
     lib_dir = None
     lib_name = None
@@ -184,6 +185,7 @@ def update_paths(base, new_path):
         return False
 
     update_scripts(bin_dir, new_path)
+    update_scripts(sbin_dir, new_path)
     update_pycs(lib_dir, new_path, lib_name)
     update_local(base, new_path)
 
