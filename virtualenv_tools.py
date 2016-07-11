@@ -82,6 +82,9 @@ def update_script(script_filename, new_path):
 
 def update_scripts(bin_dir, new_path):
     """Updates all scripts in the bin folder."""
+    if not os.path.isdir(bin_dir):
+        return
+
     for fn in os.listdir(bin_dir):
         if fn in ACTIVATION_SCRIPTS:
             update_activation_script(os.path.join(bin_dir, fn), new_path)
